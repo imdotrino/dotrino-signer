@@ -1,5 +1,7 @@
 # dotrino-signer
 
+> **Parte del ecosistema [Dotrino](https://dotrino.com).** Misión: aplicaciones que resuelven problemas comunes, respetando tu privacidad — sin anuncios, sin cookies, sin rastreo de datos, sin vender tu identidad a nadie.
+
 Autoridad de **sello de tiempo** (TSA, *timestamp authority*) del ecosistema
 **Dotrino**. Despliegue canónico: **`https://signer.dotrino.com`**.
 
