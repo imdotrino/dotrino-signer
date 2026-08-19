@@ -1,7 +1,7 @@
 {
   "name": "dotrino-signer",
   "version": "0.1.0",
-  "description": "Autoridad de sello de tiempo (TSA) del ecosistema Dotrino: firma { hash, ts } con la clave del sellador para probar cuándo existió un contenido, sin verlo. Servidor desplegado en signer.dotrino.com.",
+  "description": "Autoridad de sello de tiempo (TSA) del ecosistema Dotrino: firma { hash, ts } con la clave del sellador para probar cu\u00e1ndo existi\u00f3 un contenido, sin verlo. Servidor desplegado en signer.dotrino.com.",
   "type": "module",
   "main": "server.js",
   "files": [
@@ -11,7 +11,8 @@
   ],
   "scripts": {
     "start": "node server.js",
-    "dev": "node --watch server.js"
+    "dev": "node --watch server.js",
+    "type-check": "tsc --noEmit"
   },
   "keywords": [
     "dotrino",
@@ -29,5 +30,9 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/imdotrino/dotrino-signer.git"
+  },
+  "devDependencies": {
+    "typescript": "5.9.3",
+    "@types/node": "^22.0.0"
   }
 }
