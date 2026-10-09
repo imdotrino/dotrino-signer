@@ -15,6 +15,7 @@ import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { watchCheckout } from '@dotrino/update/checkout';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -159,7 +160,9 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(PORT, () => {
-  console.log(`[signer] dotrino-signer escuchando en :${PORT}`);
+  console.log(`[signer] dotrino-signer listening on :${PORT}`);
+  // §15: no usa pilares, así que lo que se le queda atrás es el checkout.
+  watchCheckout({ dir: path.dirname(fileURLToPath(import.meta.url)), repo: 'imdotrino/dotrino-signer', name: 'signer' });
   console.log(`[signer] alg=${ALG} pubkey=${PUBKEY_STR}`);
 });
 
