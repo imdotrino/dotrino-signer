@@ -58,7 +58,7 @@ function loadOrCreateKey () {
   const { publicKey, privateKey } = crypto.generateKeyPairSync('ec', { namedCurve: 'P-256' });
   const privJwk = privateKey.export({ format: 'jwk' });
   fs.writeFileSync(KEY_FILE, JSON.stringify(privJwk), { mode: 0o600 });
-  console.log(`[signer] clave nueva generada y guardada en ${KEY_FILE}`);
+  console.log(`[signer] new key generated and saved to ${KEY_FILE}`);
   return { privateKey, publicKey, publicJwk: publicKey.export({ format: 'jwk' }) };
 }
 
@@ -119,13 +119,13 @@ function readBody (req, limitBytes, cb) {
 
 function handleSeal (req, res) {
   readBody(req, 4096, (err, raw) => {
-    if (err) return sendJson(res, 413, { error: 'cuerpo demasiado grande' });
+    if (err) return sendJson(res, 413, { error: 'body too large' });
     let body;
-    try { body = JSON.parse(raw || '{}'); } catch { return sendJson(res, 400, { error: 'JSON inválido' }); }
+    try { body = JSON.parse(raw || '{}'); } catch { return sendJson(res, 400, { error: 'invalid JSON' }); }
     const hash = body && body.hash;
     const buf = b64urlToBuf(hash);
     if (!hash || typeof hash !== 'string' || !buf || buf.length !== HASH_BYTES) {
-      return sendJson(res, 400, { error: `hash inválido: se espera SHA-256 (${HASH_BYTES} bytes) en base64url` });
+      return sendJson(res, 400, { error: `invalid hash: expected SHA-256 (${HASH_BYTES} bytes) in base64url` });
     }
     const ts = Date.now();
     const signature = signSeal(hash, ts);
